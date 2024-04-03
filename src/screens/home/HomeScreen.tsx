@@ -40,6 +40,7 @@ import {EventModel} from '../../models/EventModel';
 import messaging, {
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
+import Toast from 'react-native-toast-message';
 
 Geocoder.init(process.env.MAP_API_KEY as string);
 
@@ -67,16 +68,13 @@ const HomeScreen = ({navigation}: any) => {
 
     getEvents();
 
-    messaging().onMessage(
-      async (mess: FirebaseMessagingTypes.RemoteMessage) => {
-        if (Platform.OS === 'android') {
-          ToastAndroid.show(
-            mess.notification?.title ?? 'fafsf',
-            ToastAndroid.SHORT,
-          );
-        }
-      },
-    );
+    messaging().onMessage(async (mess: any) => {
+      Toast.show({
+        text1: mess.notification.title,
+        text2: mess.notification.body,
+        onPress: () => console.log(mess.data.id),
+      });
+    });
   }, []);
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import store from './src/redux/store';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Host} from 'react-native-portalize';
 import {HandleNotification} from './src/utils/handleNotification';
+import Toast from 'react-native-toast-message';
 
 const App = () => {
   useEffect(() => {
@@ -27,6 +28,7 @@ const App = () => {
           </NavigationContainer>
         </Host>
       </Provider>
+      <Toast />
     </GestureHandlerRootView>
   );
 };

@@ -1,29 +1,30 @@
+import {SearchNormal1, TickCircle} from 'iconsax-react-native';
 import React, {useEffect, useRef, useState} from 'react';
+import {Alert, Share, View} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 import {Portal} from 'react-native-portalize';
 import {useSelector} from 'react-redux';
+import userAPI from '../apis/userApi';
 import {
   ButtonComponent,
   InputComponent,
   RowComponent,
   SectionComponent,
-  SpaceComponent,
   TextComponent,
   UserComponent,
 } from '../components';
-import {authSelector} from '../redux/reducers/authReducer';
-import {fontFamilies} from '../constants/fontFamilies';
-import {SearchNormal1, TickCircle} from 'iconsax-react-native';
 import {appColors} from '../constants/appColors';
-import {Alert, Share, View} from 'react-native';
+import {fontFamilies} from '../constants/fontFamilies';
+import {authSelector} from '../redux/reducers/authReducer';
 
 interface Props {
   visible: boolean;
   onClose: () => void;
+  eventId: string;
 }
 
 const ModalInvite = (props: Props) => {
-  const {visible, onClose} = props;
+  const {visible, onClose, eventId} = props;
 
   const [friendIds, setFriendIds] = useState<string[]>([]);
   const [useSelected, setUseSelected] = useState<string[]>([]);
@@ -78,6 +79,27 @@ const ModalInvite = (props: Props) => {
     }
   };
 
+  const handleSendInviteNotification = async () => {
+    if (useSelected.length > 0) {
+      const api = `/send-invite`;
+
+      try {
+        await userAPI.HandleUser(
+          api,
+          {
+            ids: useSelected,
+            eventId: '',
+          },
+          'post',
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      Alert.alert('', 'Please select user want to invite!!');
+    }
+  };
+
   return (
     <Portal>
       <Modalize
@@ -86,7 +108,14 @@ const ModalInvite = (props: Props) => {
         ref={modalizeRef}
         FooterComponent={
           <SectionComponent>
-            <ButtonComponent text="Invite" onPress={onShare} type="primary" />
+            <ButtonComponent
+              text="Invite"
+              onPress={() => {
+                onShare();
+                handleSendInviteNotification();
+              }}
+              type="primary"
+            />
           </SectionComponent>
         }
         onClose={onClose}>

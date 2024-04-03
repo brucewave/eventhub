@@ -35,7 +35,7 @@ const EventItem = (props: Props) => {
     <CardComponent
       isShadow
       styles={{width: appInfo.sizes.WIDTH * 0.7}}
-      onPress={() => navigation.navigate('EventDetail', {item})}>
+      onPress={() => navigation.navigate('EventDetail', {id: item._id})}>
       {type === 'card' ? (
         <>
           <ImageBackground
