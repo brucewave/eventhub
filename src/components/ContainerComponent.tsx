@@ -40,7 +40,8 @@ const ContainerComponent = (props: Props) => {
               paddingVertical: 10,
               minWidth: 48,
               minHeight: 48,
-              justifyContent: 'flex-start',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
             {back && (
               <TouchableOpacity
@@ -50,13 +51,15 @@ const ContainerComponent = (props: Props) => {
               </TouchableOpacity>
             )}
 
-            <View style={{flex: 1}}>
+            <View
+              style={{
+                flex: 1,
+              }}>
               {title ? (
                 <TextComponent
                   text={title}
                   size={16}
                   font={fontFamilies.medium}
-                  flex={1}
                 />
               ) : (
                 <></>

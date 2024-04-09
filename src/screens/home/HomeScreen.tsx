@@ -1,4 +1,5 @@
 import GeoLocation from '@react-native-community/geolocation';
+import messaging from '@react-native-firebase/messaging';
 import axios from 'axios';
 import {
   HambergerMenu,
@@ -8,17 +9,19 @@ import {
 } from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   FlatList,
   ImageBackground,
   Platform,
   ScrollView,
   StatusBar,
-  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
 import Geocoder from 'react-native-geocoding';
+import Toast from 'react-native-toast-message';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import eventAPI from '../../apis/eventApi';
 import {
   CategoriesList,
   CircleComponent,
@@ -34,13 +37,8 @@ import {
 import {appColors} from '../../constants/appColors';
 import {fontFamilies} from '../../constants/fontFamilies';
 import {AddressModel} from '../../models/AddressModel';
-import {globalStyles} from '../../styles/globalStyles';
-import eventAPI from '../../apis/eventApi';
 import {EventModel} from '../../models/EventModel';
-import messaging, {
-  FirebaseMessagingTypes,
-} from '@react-native-firebase/messaging';
-import Toast from 'react-native-toast-message';
+import {globalStyles} from '../../styles/globalStyles';
 
 Geocoder.init(process.env.MAP_API_KEY as string);
 
@@ -72,7 +70,12 @@ const HomeScreen = ({navigation}: any) => {
       Toast.show({
         text1: mess.notification.title,
         text2: mess.notification.body,
-        onPress: () => console.log(mess.data.id),
+        onPress: () => {
+          console.log(mess);
+          const id = mess.data.id;
+          console.log(id);
+          navigation.navigate('EventDetail', {id});
+        },
       });
     });
   }, []);
@@ -125,7 +128,6 @@ const HomeScreen = ({navigation}: any) => {
   return (
     <View style={[globalStyles.container]}>
       <StatusBar barStyle={'light-content'} />
-
       <View
         style={{
           backgroundColor: appColors.primary,
@@ -232,6 +234,7 @@ const HomeScreen = ({navigation}: any) => {
           <CategoriesList isFill />
         </View>
       </View>
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={[
@@ -241,7 +244,10 @@ const HomeScreen = ({navigation}: any) => {
           },
         ]}>
         <SectionComponent styles={{paddingHorizontal: 0, paddingTop: 24}}>
-          <TabBarComponent title="Upcoming Events" onPress={() => {}} />
+          <TabBarComponent
+            title="Upcoming Events"
+            onPress={() => navigation.navigate('ExploreEvents')}
+          />
           {events.length > 0 ? (
             <FlatList
               showsHorizontalScrollIndicator={false}

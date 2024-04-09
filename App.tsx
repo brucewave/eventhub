@@ -8,6 +8,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Host} from 'react-native-portalize';
 import {HandleNotification} from './src/utils/handleNotification';
 import Toast from 'react-native-toast-message';
+import linking from './src/linking';
 
 const App = () => {
   useEffect(() => {
@@ -23,7 +24,7 @@ const App = () => {
           translucent
         />
         <Host>
-          <NavigationContainer>
+          <NavigationContainer linking={linking}>
             <AppRouters />
           </NavigationContainer>
         </Host>

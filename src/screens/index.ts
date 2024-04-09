@@ -1,4 +1,5 @@
 import AddNewScreen from './AddNewScreen';
+import NotFound from './NotFound';
 import SplashScreen from './SplashScreen';
 import ForgotPassword from './auth/ForgotPassword';
 import LoginScreen from './auth/LoginScreen';
@@ -6,6 +7,7 @@ import SignUpScreen from './auth/SignUpScreen';
 import Verification from './auth/Verification';
 import EventDetail from './events/EventDetail';
 import EventsScreen from './events/EventsScreen';
+import ExploreEvents from './events/ExploreEvents';
 import SearchEvents from './events/SearchEvents';
 import HomeScreen from './home/HomeScreen';
 import MapScreen from './maps/MapScreen';
@@ -26,4 +28,6 @@ export {
   SearchEvents,
   EventDetail,
   EditProfileScreen,
+  NotFound,
+  ExploreEvents,
 };

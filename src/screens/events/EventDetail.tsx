@@ -46,6 +46,7 @@ const EventDetail = ({navigation, route}: any) => {
 
   useEffect(() => {
     if (id) {
+      getEventById();
       getFollowersById();
     }
   }, [id]);
@@ -137,6 +138,18 @@ const EventDetail = ({navigation, route}: any) => {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
+    }
+  };
+
+  const getEventById = async () => {
+    const api = `/get-event?id=${id}`;
+
+    try {
+      const res: any = await eventAPI.HandleEvent(api);
+
+      setItem(res.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 

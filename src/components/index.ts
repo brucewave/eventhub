@@ -11,6 +11,7 @@ import DateTimePicker from './DateTimePicker';
 import DropdownPicker from './DropdownPicker';
 import EventItem from './EventItem';
 import InputComponent from './InputComponent';
+import ListEventComponent from './ListEventComponent';
 import LoadingComponent from './LoadingComponent';
 import MakerCustom from './MakerCustom';
 import RowComponent from './RowComponent';
@@ -44,4 +45,5 @@ export {
   LoadingComponent,
   AvatarComponent,
   UserComponent,
+  ListEventComponent,
 };
