@@ -109,7 +109,6 @@ const HomeScreen = ({navigation}: any) => {
           }&limit=5`
         : `/get-events?limit=5`
     }`;
-    // &date=${new Date().toISOString()}`;
 
     setIsLoading(true);
     try {

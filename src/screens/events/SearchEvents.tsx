@@ -15,16 +15,33 @@ import {
 import {appColors} from '../../constants/appColors';
 import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
+import {debounce} from 'lodash';
+import {LoadingModal} from '../../modals';
 
 const SearchEvents = ({navigation, route}: any) => {
   const [events, setEvents] = useState<EventModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchKey, setSearchKey] = useState('');
+  const [results, setResults] = useState<EventModel[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   const isFocused = useIsFocused();
 
   useEffect(() => {
     isFocused && getEvents();
   }, [isFocused]);
+
+  useEffect(() => {
+    console.log(searchKey);
+
+    if (!searchKey) {
+      setResults(events);
+    } else {
+      const hangeChangeSearchValue = debounce(handleSearchEvent, 500);
+
+      hangeChangeSearchValue();
+    }
+  }, [searchKey]);
 
   const getEvents = async () => {
     const api = `/get-events`;
@@ -44,6 +61,29 @@ const SearchEvents = ({navigation, route}: any) => {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
+    }
+  };
+
+  const handleSearchEvent = async () => {
+    const api = `/search-events?title=${searchKey}`;
+
+    // setIsSearching(true);
+
+    console.log(api);
+
+    try {
+      const res = await eventAPI.HandleEvent(api);
+
+      if (res.data && res.data.length > 0) {
+        setResults(res.data);
+      } else {
+        setResults([]);
+      }
+
+      setIsSearching(false);
+    } catch (error) {
+      console.log(error);
+      setIsSearching(false);
     }
   };
 
@@ -73,8 +113,8 @@ const SearchEvents = ({navigation, route}: any) => {
             />
             <TextInput
               placeholder="Search"
-              value=""
-              onChangeText={val => console.log(val)}
+              value={searchKey}
+              onChangeText={val => setSearchKey(val)}
               style={[globalStyles.text, {flex: 1}]}
             />
           </RowComponent>
@@ -90,10 +130,10 @@ const SearchEvents = ({navigation, route}: any) => {
           />
         </RowComponent>
       </SectionComponent>
-      {events.length > 0 ? (
-        <ListEventComponent items={events} />
+      {results.length > 0 ? (
+        <ListEventComponent items={results} />
       ) : (
-        <LoadingComponent isLoading={isLoading} values={events.length} />
+        <LoadingComponent isLoading={isLoading} values={results.length} />
       )}
     </ContainerComponent>
   );
