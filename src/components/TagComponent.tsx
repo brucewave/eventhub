@@ -24,6 +24,7 @@ const TagComponent = (props: Props) => {
       style={[
         globalStyles.row,
         globalStyles.tag,
+        globalStyles.center,
         {
           backgroundColor: bgColor ? bgColor : appColors.white,
         },

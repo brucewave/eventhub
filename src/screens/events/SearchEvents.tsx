@@ -1,7 +1,7 @@
 import {useIsFocused} from '@react-navigation/native';
 import {SearchNormal1, Sort} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
-import {TextInput, View} from 'react-native';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import eventAPI from '../../apis/eventApi';
 import {
   CircleComponent,
@@ -11,6 +11,7 @@ import {
   RowComponent,
   SectionComponent,
   TagComponent,
+  TextComponent,
 } from '../../components';
 import {appColors} from '../../constants/appColors';
 import {EventModel} from '../../models/EventModel';
@@ -67,10 +68,6 @@ const SearchEvents = ({navigation, route}: any) => {
   const handleSearchEvent = async () => {
     const api = `/search-events?title=${searchKey}`;
 
-    // setIsSearching(true);
-
-    console.log(api);
-
     try {
       const res = await eventAPI.HandleEvent(api);
 
@@ -86,6 +83,28 @@ const SearchEvents = ({navigation, route}: any) => {
       setIsSearching(false);
     }
   };
+
+  // const handleUpdateEvent = async () => {
+  //   const categories = ['65f27187a08051b6ce99084d'];
+
+  //   try {
+  //     events.forEach(async item => {
+  //       const api = `/update-event?id=${item._id}`;
+
+  //       const res = await eventAPI.HandleEvent(
+  //         api,
+  //         {
+  //           data: {categories},
+  //         },
+  //         'put',
+  //       );
+
+  //       console.log(res);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <ContainerComponent back title="Search">
@@ -130,6 +149,7 @@ const SearchEvents = ({navigation, route}: any) => {
           />
         </RowComponent>
       </SectionComponent>
+
       {results.length > 0 ? (
         <ListEventComponent items={results} />
       ) : (

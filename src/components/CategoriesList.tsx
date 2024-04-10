@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -6,6 +6,8 @@ import {TagComponent} from '.';
 import {KnifeFork, KnifeFork_Color} from '../assets/svgs';
 import {appColors} from '../constants/appColors';
 import {Category} from '../models/Category';
+import eventAPI from '../apis/eventApi';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   isFill?: boolean;
@@ -14,55 +16,67 @@ interface Props {
 const CategoriesList = (props: Props) => {
   const {isFill} = props;
 
-  const categories: Category[] = [
-    {
-      key: 'sports',
-      label: 'Sports',
-      icon: (
-        <FontAwesome5
-          name="basketball-ball"
-          color={isFill ? appColors.white : '#F0635A'}
-          size={20}
-        />
-      ),
-      color: '#F0635A',
-    },
-    {
-      key: 'mucsic',
-      label: 'Music',
-      icon: (
-        <FontAwesome5
-          name="music"
-          color={isFill ? appColors.white : '#F59762'}
-          size={20}
-        />
-      ),
-      color: '#F59762',
-    },
-    {
-      key: 'food',
-      label: 'Food',
-      icon: isFill ? (
-        <KnifeFork color={isFill ? appColors.white : '#29D697'} />
-      ) : (
-        <KnifeFork_Color color={isFill ? appColors.white : '#29D697'} />
-      ),
-      color: '#29D697',
-    },
-    {
-      key: 'art',
-      label: 'Art',
-      icon: (
-        <Ionicons
-          name="color-palette"
-          color={isFill ? appColors.white : '#46CDFB'}
-        />
-      ),
-      color: '#46CDFB',
-    },
-  ];
+  const [categories, setCategories] = useState<Category[]>([]);
+  const navigation: any = useNavigation();
 
-  return (
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getCategories = async () => {
+    const api = `/get-categories`;
+
+    try {
+      const res = await eventAPI.HandleEvent(api);
+
+      setCategories(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const renderIcon = (key: string) => {
+    let icon = <></>;
+    switch (key) {
+      case 'music':
+        icon = (
+          <FontAwesome5
+            name="music"
+            color={isFill ? appColors.white : '#F59762'}
+            size={20}
+          />
+        );
+        break;
+      case 'art':
+        icon = (
+          <Ionicons
+            name="color-palette"
+            size={20}
+            color={isFill ? appColors.white : '#46CDFB'}
+          />
+        );
+        break;
+      case '1':
+        icon = isFill ? (
+          <KnifeFork color={isFill ? appColors.white : '#29D697'} />
+        ) : (
+          <KnifeFork_Color color={isFill ? appColors.white : '#29D697'} />
+        );
+        break;
+      default:
+        icon = (
+          <FontAwesome5
+            name="basketball-ball"
+            color={isFill ? appColors.white : '#F0635A'}
+            size={20}
+          />
+        );
+        break;
+    }
+    return icon;
+  };
+
+  return categories.length > 0 ? (
     <FlatList
       style={{paddingHorizontal: 16}}
       horizontal
@@ -75,13 +89,20 @@ const CategoriesList = (props: Props) => {
             minWidth: 82,
           }}
           bgColor={isFill ? item.color : appColors.white}
-          onPress={() => {}}
-          icon={item.icon}
-          label={item.label}
+          onPress={() =>
+            navigation.navigate('CategoryDetail', {
+              id: item._id,
+              title: item.title,
+            })
+          }
+          label={item.title}
+          icon={renderIcon(item.key)}
           textColor={isFill ? appColors.white : appColors.text2}
         />
       )}
     />
+  ) : (
+    <></>
   );
 };
 
