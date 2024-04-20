@@ -1,6 +1,12 @@
 import {ArrowLeft, ArrowRight, Calendar, Location} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {LinearGradient} from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
@@ -35,6 +41,7 @@ import ModalInvite from '../../modals/ModalInvite';
 
 const EventDetail = ({navigation, route}: any) => {
   const {id}: {id: string} = route.params;
+
   const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState<string[]>([]);
   const [profile, setProfile] = useState<ProfileModel>();
@@ -46,10 +53,17 @@ const EventDetail = ({navigation, route}: any) => {
 
   useEffect(() => {
     if (id) {
-      getEventById();
-      getFollowersById();
+      getData();
     }
   }, [id]);
+
+  const getData = async () => {
+    setIsLoading(true);
+    await getEventById();
+    await getProfile(id);
+    await getFollowersById();
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     if (item) {
@@ -107,16 +121,11 @@ const EventDetail = ({navigation, route}: any) => {
 
   const getProfile = async (id: string) => {
     const api = `/get-profile?uid=${id}`;
-
-    setIsLoading(true);
     try {
       const res = await userAPI.HandleUser(api);
       res && res.data && setProfile(res.data);
-
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
     }
   };
 
@@ -152,8 +161,13 @@ const EventDetail = ({navigation, route}: any) => {
       console.log(error);
     }
   };
+  // console.log(id);
 
-  return item ? (
+  return isLoading ? (
+    <View style={[globalStyles.container, globalStyles.center, {flex: 1}]}>
+      <ActivityIndicator />
+    </View>
+  ) : item ? (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View
         style={{position: 'absolute', top: 0, right: 0, zIndex: 1, left: 0}}>

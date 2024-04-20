@@ -5,7 +5,7 @@ import {fontFamilies} from '../constants/fontFamilies';
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: appColors.white,
+    backgroundColor: 'white',
   },
 
   text: {

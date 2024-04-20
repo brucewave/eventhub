@@ -3,6 +3,7 @@ import messaging from '@react-native-firebase/messaging';
 import axios from 'axios';
 import {
   HambergerMenu,
+  Link,
   Notification,
   SearchNormal1,
   Sort,
@@ -12,6 +13,7 @@ import {
   Alert,
   FlatList,
   ImageBackground,
+  Linking,
   Platform,
   ScrollView,
   StatusBar,
@@ -135,6 +137,14 @@ const HomeScreen = ({navigation}: any) => {
           borderBottomRightRadius: 40,
           paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 52,
         }}>
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL(
+              'eventhub://app/home/detail/65e1870653232561b467ec8e',
+            )
+          }>
+          <TextComponent text="fafaf" />
+        </TouchableOpacity>
         <View style={{paddingHorizontal: 16}}>
           <RowComponent>
             <TouchableOpacity onPress={() => navigation.openDrawer()}>
