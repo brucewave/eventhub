@@ -41,6 +41,7 @@ import {fontFamilies} from '../../constants/fontFamilies';
 import {AddressModel} from '../../models/AddressModel';
 import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
+import {handleLinking} from '../../utils/handleLinking';
 
 Geocoder.init(process.env.MAP_API_KEY as string);
 
@@ -73,13 +74,20 @@ const HomeScreen = ({navigation}: any) => {
         text1: mess.notification.title,
         text2: mess.notification.body,
         onPress: () => {
-          console.log(mess);
+          // handleLinking(`eventhub://app/detail/${mess.data.id}`);
+
           const id = mess.data.id;
-          console.log(id);
+          // console.log(id);
           navigation.navigate('EventDetail', {id});
         },
       });
     });
+
+    messaging()
+      .getInitialNotification()
+      .then((mess: any) => {
+        handleLinking(`eventhub://app/detail/${mess.data.id}`);
+      });
   }, []);
 
   useEffect(() => {

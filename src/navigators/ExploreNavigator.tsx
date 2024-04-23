@@ -19,6 +19,7 @@ const ExploreNavigator = () => {
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="CategoryDetail" component={CategoryDetail} />
+
       {/* <Stack.Screen name="EventDetail" component={EventDetail} /> */}
     </Stack.Navigator>
   );

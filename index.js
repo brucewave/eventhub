@@ -9,11 +9,12 @@ import messaging from '@react-native-firebase/messaging';
 import {handleLinking} from './src/utils/handleLinking';
 
 messaging().setBackgroundMessageHandler(async mess => {
-  handleLinking(`eventhub://app/fsakjhgjsakghks`);
+  // handleLinking(`eventhub://app/detail/${mess.data.id}`);
 });
 
 messaging().onNotificationOpenedApp(mess => {
-  handleLinking(`eventhub://app/fsakjhgjsakghks`);
+  // console.log(`forgress:  ${mess}`);
+  handleLinking(`eventhub://app/detail/${mess.data.id}`);
 });
 
 AppRegistry.registerComponent(appName, () => App);

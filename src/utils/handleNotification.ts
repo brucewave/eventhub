@@ -29,6 +29,8 @@ export class HandleNotification {
     if (!fcmtoken) {
       const token = await messaging().getToken();
 
+      console.log(token);
+
       if (token) {
         await AsyncStorage.setItem('fcmtoken', token);
         this.updateTokenForUser(token);
