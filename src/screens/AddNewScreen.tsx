@@ -23,6 +23,7 @@ import {appColors} from '../constants/appColors';
 import storage from '@react-native-firebase/storage';
 import {EventModel} from '../models/EventModel';
 import eventAPI from '../apis/eventApi';
+import {LoadingModal} from '../modals';
 
 const initValues = {
   title: '',
@@ -53,6 +54,7 @@ const AddNewScreen = ({navigation}: any) => {
   const [usersSelects, setUsersSelects] = useState<SelectModel[]>([]);
   const [fileSelected, setFileSelected] = useState<any>();
   const [errorsMess, setErrorsMess] = useState<string[]>([]);
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     handleGetAllUsers();
@@ -64,8 +66,12 @@ const AddNewScreen = ({navigation}: any) => {
     setErrorsMess(mess);
   }, [eventData]);
 
-  const handleChangeValue = (key: string, value: string | Date | string[]) => {
+  const handleChangeValue = (
+    key: string,
+    value: string | number | string[],
+  ) => {
     const items = {...eventData};
+
     items[`${key}`] = value;
 
     setEventData(items);
@@ -131,12 +137,15 @@ const AddNewScreen = ({navigation}: any) => {
 
   const handlePustEvent = async (event: EventModel) => {
     const api = `/add-new`;
+    setIsCreating(true);
     try {
       const res = await eventAPI.HandleEvent(api, event, 'post');
+      setIsCreating(false);
       navigation.navigate('Explore', {
         screen: 'HomeScreen',
       });
     } catch (error) {
+      setIsCreating(false);
       console.log(error);
     }
   };
@@ -285,6 +294,8 @@ const AddNewScreen = ({navigation}: any) => {
           type="primary"
         />
       </SectionComponent>
+
+      <LoadingModal visible={isCreating} />
     </ContainerComponent>
   );
 };

@@ -42,6 +42,7 @@ import {AddressModel} from '../../models/AddressModel';
 import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
 import {handleLinking} from '../../utils/handleLinking';
+import {useIsFocused} from '@react-navigation/native';
 
 Geocoder.init(process.env.MAP_API_KEY as string);
 
@@ -50,6 +51,8 @@ const HomeScreen = ({navigation}: any) => {
   const [events, setEvents] = useState<EventModel[]>([]);
   const [nearbyEvents, setNearbyEvents] = useState<EventModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     GeoLocation.getCurrentPosition(
@@ -74,11 +77,8 @@ const HomeScreen = ({navigation}: any) => {
         text1: mess.notification.title,
         text2: mess.notification.body,
         onPress: () => {
-          // handleLinking(`eventhub://app/detail/${mess.data.id}`);
-
-          const id = mess.data.id;
-          // console.log(id);
-          navigation.navigate('EventDetail', {id});
+          const id = mess.data ? mess.data.id : '';
+          id && navigation.navigate('EventDetail', {id});
         },
       });
     });
@@ -86,15 +86,27 @@ const HomeScreen = ({navigation}: any) => {
     messaging()
       .getInitialNotification()
       .then((mess: any) => {
-        handleLinking(`eventhub://app/detail/${mess.data.id}`);
+        const id = mess && mess.data ? mess.data.id : '';
+        id && handleLinking(`eventhub://app/detail/${mess.data.id}`);
       });
   }, []);
 
   useEffect(() => {
+    getNearByEvents();
+  }, [currentLocation]);
+
+  useEffect(() => {
+    if (isFocused) {
+      getEvents();
+      getNearByEvents();
+    }
+  }, [isFocused]);
+
+  const getNearByEvents = () => {
     currentLocation &&
       currentLocation.position &&
       getEvents(currentLocation.position.lat, currentLocation.position.lng);
-  }, [currentLocation]);
+  };
 
   const reverseGeoCode = async ({lat, long}: {lat: number; long: number}) => {
     const api = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat},${long}&lang=vi-VI&apiKey=zCDIlA5ytRuEe3YS9YrJlzAGjTkxsy4S6mJtq7ZpkGU`;
@@ -120,7 +132,9 @@ const HomeScreen = ({navigation}: any) => {
         : `/get-events?limit=5`
     }`;
 
-    setIsLoading(true);
+    if (events.length === 0 || nearbyEvents.length === 0) {
+      setIsLoading(true);
+    }
     try {
       const res = await eventAPI.HandleEvent(api);
 
