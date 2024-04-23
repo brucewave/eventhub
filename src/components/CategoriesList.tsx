@@ -28,7 +28,6 @@ const CategoriesList = (props: Props) => {
 
     try {
       const res = await eventAPI.HandleEvent(api);
-
       setCategories(res.data);
     } catch (error) {
       console.log(error);
@@ -84,6 +83,7 @@ const CategoriesList = (props: Props) => {
       data={categories}
       renderItem={({item, index}) => (
         <TagComponent
+          key={`${Math.random() * 100000}`}
           styles={{
             marginRight: index === categories.length - 1 ? 28 : 12,
             minWidth: 82,
