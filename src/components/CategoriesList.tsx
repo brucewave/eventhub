@@ -2,7 +2,7 @@ import React, {ReactNode, useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {TagComponent} from '.';
+import {TagComponent, TextComponent} from '.';
 import {KnifeFork, KnifeFork_Color} from '../assets/svgs';
 import {appColors} from '../constants/appColors';
 import {Category} from '../models/Category';
@@ -81,9 +81,9 @@ const CategoriesList = (props: Props) => {
       horizontal
       showsHorizontalScrollIndicator={false}
       data={categories}
+      keyExtractor={item => item._id}
       renderItem={({item, index}) => (
         <TagComponent
-          key={`${Math.random() * 100000}`}
           styles={{
             marginRight: index === categories.length - 1 ? 28 : 12,
             minWidth: 82,
