@@ -5,6 +5,7 @@ import {
   EventDetail,
   ExploreEvents,
   NotFound,
+  PaymentScreen,
   ProfileScreen,
   SearchEvents,
 } from '../screens';
@@ -23,6 +24,7 @@ const MainNavigator = () => {
       <Stack.Screen name="NotFound" component={NotFound} />
       <Stack.Screen name="ExploreEvents" component={ExploreEvents} />
       <Stack.Screen name="SearchEvents" component={SearchEvents} />
+      <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
     </Stack.Navigator>
   );
 };

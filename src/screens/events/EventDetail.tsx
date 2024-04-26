@@ -162,6 +162,25 @@ const EventDetail = ({navigation, route}: any) => {
     }
   };
 
+  const handleCreateBillPaymentDetail = async () => {
+    const data = {
+      createdAt: Date.now(),
+      createdBy: auth.id,
+      eventId: id,
+      price: item?.price,
+      authorId: item?.authorId,
+    };
+
+    const api = `/buy-ticket`;
+
+    try {
+      const res = await eventAPI.HandleEvent(api, data, 'post');
+      navigation.navigate('PaymentScreen', {billDetail: res.data});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return isLoading ? (
     <View style={[globalStyles.container, globalStyles.center, {flex: 1}]}>
       <ActivityIndicator />
@@ -406,9 +425,9 @@ const EventDetail = ({navigation, route}: any) => {
           padding: 12,
         }}>
         <ButtonComponent
-          text="BUY TICKET $120"
+          text={`BUY TICKET $${parseFloat(item.price).toLocaleString()}`}
           type="primary"
-          onPress={() => {}}
+          onPress={handleCreateBillPaymentDetail}
           iconFlex="right"
           icon={
             <View
