@@ -7,7 +7,7 @@ import {KnifeFork, KnifeFork_Color} from '../assets/svgs';
 import {appColors} from '../constants/appColors';
 import {Category} from '../models/Category';
 import eventAPI from '../apis/eventApi';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 interface Props {
   isFill?: boolean;
@@ -55,7 +55,7 @@ const CategoriesList = (props: Props) => {
           />
         );
         break;
-      case '1':
+      case 'food':
         icon = isFill ? (
           <KnifeFork color={isFill ? appColors.white : '#29D697'} />
         ) : (

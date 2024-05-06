@@ -1,6 +1,10 @@
-import {View, Text, StyleSheet, Button, TouchableOpacity} from 'react-native';
+import {ArrowDown2, SearchNormal1} from 'iconsax-react-native';
 import React, {useEffect, useRef, useState} from 'react';
-import {SelectModel} from '../models/SelectModel';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Modalize} from 'react-native-modalize';
+import {Portal} from 'react-native-portalize';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   ButtonComponent,
   InputComponent,
@@ -8,14 +12,10 @@ import {
   SpaceComponent,
   TextComponent,
 } from '.';
-import {ArrowDown2, SearchNormal1} from 'iconsax-react-native';
 import {appColors} from '../constants/appColors';
-import {globalStyles} from '../styles/globalStyles';
-import {Modalize} from 'react-native-modalize';
-import {Portal} from 'react-native-portalize';
 import {fontFamilies} from '../constants/fontFamilies';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {SelectModel} from '../models/SelectModel';
+import {globalStyles} from '../styles/globalStyles';
 
 interface Props {
   label?: string;
@@ -151,6 +151,7 @@ const DropdownPicker = (props: Props) => {
         <Modalize
           handlePosition="inside"
           ref={modalieRef}
+          adjustToContentHeight
           FooterComponent={
             multible && (
               <View style={{paddingHorizontal: 20, paddingBottom: 30}}>
