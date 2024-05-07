@@ -1,20 +1,17 @@
 import GeoLocation from '@react-native-community/geolocation';
 import messaging from '@react-native-firebase/messaging';
+import {useIsFocused} from '@react-navigation/native';
 import axios from 'axios';
 import {
   HambergerMenu,
-  Link,
   Notification,
   SearchNormal1,
   Sort,
 } from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
 import {
-  Alert,
   FlatList,
-  Image,
   ImageBackground,
-  Linking,
   Platform,
   ScrollView,
   StatusBar,
@@ -26,6 +23,7 @@ import Toast from 'react-native-toast-message';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import eventAPI from '../../apis/eventApi';
 import {
+  ButtonComponent,
   CategoriesList,
   CircleComponent,
   EventItem,
@@ -43,7 +41,6 @@ import {AddressModel} from '../../models/AddressModel';
 import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
 import {handleLinking} from '../../utils/handleLinking';
-import {useIsFocused} from '@react-navigation/native';
 
 Geocoder.init(process.env.MAP_API_KEY as string);
 

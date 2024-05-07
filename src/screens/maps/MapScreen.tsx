@@ -103,7 +103,7 @@ const MapScreen = ({navigation}: any) => {
                   longitude: event.position.long,
                   latitude: event.position.lat,
                 }}>
-                <MakerCustom type={event.category} />
+                <MakerCustom categoryId={event.categories} />
               </Marker>
             ))}
         </MapView>

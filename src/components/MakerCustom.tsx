@@ -1,46 +1,39 @@
-import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
-import React from 'react';
-import {TextComponent} from '.';
+import React, {useEffect, useState} from 'react';
+import {Image, ImageBackground, View} from 'react-native';
 import {globalStyles} from '../styles/globalStyles';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {KnifeFork_Color} from '../assets/svgs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import eventAPI from '../apis/eventApi';
+import {Category} from '../models/Category';
 
 interface Props {
-  type: string;
+  categoryId: string;
 }
 
 const MakerCustom = (props: Props) => {
-  const {type} = props;
+  const {categoryId} = props;
 
-  const renderIcon = (type: string) => {
-    let icon;
+  const [category, setCategory] = useState<Category>();
 
-    switch (type) {
-      case 'art':
-        icon = <Ionicons name="color-palette" color={'#46CDFB'} size={24} />;
-        break;
-      case 'sport':
-        icon = (
-          <FontAwesome5 name="basketball-ball" color={'#F0635A'} size={24} />
-        );
-        break;
-      case 'food':
-        icon = <KnifeFork_Color />;
-        break;
+  useEffect(() => {
+    categoryId && getCategoryById();
+  }, [categoryId]);
 
-      default:
-        icon = <FontAwesome5 name="music" color={'#F59762'} size={24} />;
-        break;
+  const getCategoryById = async () => {
+    const api = `/get-category?id=${categoryId}`;
+    try {
+      const res = await eventAPI.HandleEvent(api);
+
+      setCategory(res.data);
+    } catch (error: any) {
+      console.log(error);
     }
-
-    return icon;
   };
-  return (
+
+  return category ? (
     <ImageBackground
       source={require('../assets/images/Union.png')}
       style={[
         globalStyles.shadow,
+
         {
           width: 56,
           height: 56,
@@ -48,13 +41,35 @@ const MakerCustom = (props: Props) => {
           alignItems: 'center',
         },
       ]}
-      imageStyle={{
-        resizeMode: 'contain',
-        width: 56,
-        height: 56,
-      }}>
-      {renderIcon(type)}
+      imageStyle={[
+        globalStyles.center,
+        {
+          resizeMode: 'contain',
+          width: 56,
+          height: 56,
+        },
+      ]}>
+      <View
+        style={[
+          globalStyles.center,
+          {
+            width: 38,
+            height: 38,
+            backgroundColor: category.color,
+            borderRadius: 12,
+          },
+        ]}>
+        <Image
+          source={{uri: category.iconWhite}}
+          style={{
+            width: 24,
+            height: 24,
+          }}
+        />
+      </View>
     </ImageBackground>
+  ) : (
+    <></>
   );
 };
 
