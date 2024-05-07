@@ -1,27 +1,33 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {FlatList, Image} from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {ButtonComponent, TagComponent} from '.';
+import {TagComponent} from '.';
 import eventAPI from '../apis/eventApi';
-import {KnifeFork, KnifeFork_Color} from '../assets/svgs';
 import {appColors} from '../constants/appColors';
 import {Category} from '../models/Category';
 
 interface Props {
   isFill?: boolean;
+  onFilter?: (id: string) => void;
 }
 
 const CategoriesList = (props: Props) => {
-  const {isFill} = props;
+  const {isFill, onFilter} = props;
 
   const [categories, setCategories] = useState<Category[]>([]);
+  const [categorySelected, setCategorySelected] = useState('');
+
   const navigation: any = useNavigation();
 
   useEffect(() => {
     getCategories();
   }, []);
+
+  useEffect(() => {
+    if (categorySelected && onFilter) {
+      onFilter(categorySelected);
+    }
+  }, [categorySelected]);
 
   const getCategories = async () => {
     const api = `/get-categories`;
@@ -31,6 +37,17 @@ const CategoriesList = (props: Props) => {
       setCategories(res.data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleSelectCategory = async (item: Category) => {
+    if (!onFilter) {
+      navigation.navigate('CategoryDetail', {
+        id: item._id,
+        title: item.title,
+      });
+    } else {
+      setCategorySelected(item._id);
     }
   };
 
@@ -47,21 +64,34 @@ const CategoriesList = (props: Props) => {
             marginRight: index === categories.length - 1 ? 28 : 12,
             minWidth: 82,
           }}
-          bgColor={isFill ? item.color : 'white'}
-          onPress={() =>
-            navigation.navigate('CategoryDetail', {
-              id: item._id,
-              title: item.title,
-            })
+          bgColor={
+            isFill
+              ? item.color
+              : categorySelected === item._id
+              ? item.color
+              : 'white'
           }
+          onPress={() => handleSelectCategory(item)}
           label={item.title}
           icon={
             <Image
-              source={{uri: isFill ? item.iconWhite : item.iconColor}}
+              source={{
+                uri: isFill
+                  ? item.iconWhite
+                  : categorySelected === item._id
+                  ? item.iconWhite
+                  : item.iconColor,
+              }}
               style={{width: 20, height: 20}}
             />
           }
-          textColor={isFill ? 'white' : appColors.text2}
+          textColor={
+            isFill
+              ? 'white'
+              : categorySelected === item._id
+              ? appColors.white
+              : appColors.text2
+          }
         />
       )}
     />
