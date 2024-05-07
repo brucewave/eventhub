@@ -1,4 +1,7 @@
+import {SearchNormal1} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import eventAPI from '../../apis/eventApi';
 import {
   ButtonComponent,
   ContainerComponent,
@@ -6,14 +9,9 @@ import {
   LoadingComponent,
   RowComponent,
   SpaceComponent,
-  TextComponent,
 } from '../../components';
-import {Text} from 'react-native-svg';
-import {EventModel} from '../../models/EventModel';
-import eventAPI from '../../apis/eventApi';
-import {MoreCircle, SearchNormal1} from 'iconsax-react-native';
 import {appColors} from '../../constants/appColors';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {EventModel} from '../../models/EventModel';
 
 const ExploreEvents = ({navigation}: any) => {
   const [events, setEvents] = useState<EventModel[]>([]);
