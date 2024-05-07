@@ -12,6 +12,7 @@ import React, {useEffect, useState} from 'react';
 import {
   Alert,
   FlatList,
+  Image,
   ImageBackground,
   Linking,
   Platform,
