@@ -6,6 +6,7 @@ import {
   EventItem,
   ListEventComponent,
   LoadingComponent,
+  RadioButtons,
   RowComponent,
   SectionComponent,
   SpaceComponent,
@@ -22,6 +23,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const EventsScreen = ({navigation}: any) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [filterKey, setFilterKey] = useState('upcoming');
   const [events, setEvents] = useState<EventModel[]>([]);
   useEffect(() => {
     getData();
@@ -55,6 +57,20 @@ const EventsScreen = ({navigation}: any) => {
           }
         />
       }>
+      <RadioButtons
+        selected={filterKey}
+        onSelect={(id: string) => setFilterKey(id)}
+        data={[
+          {
+            label: 'Upcoming',
+            value: 'upcoming',
+          },
+          {
+            label: 'Past event',
+            value: 'pastEvent',
+          },
+        ]}
+      />
       <FlatList
         contentContainerStyle={{flex: 1}}
         ListEmptyComponent={

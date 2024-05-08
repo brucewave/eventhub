@@ -14,6 +14,7 @@ import InputComponent from './InputComponent';
 import ListEventComponent from './ListEventComponent';
 import LoadingComponent from './LoadingComponent';
 import MakerCustom from './MakerCustom';
+import RadioButtons from './RadioButtons';
 import RowComponent from './RowComponent';
 import SectionComponent from './SectionComponent';
 import SpaceComponent from './SpaceComponent';
@@ -46,4 +47,5 @@ export {
   AvatarComponent,
   UserComponent,
   ListEventComponent,
+  RadioButtons
 };
