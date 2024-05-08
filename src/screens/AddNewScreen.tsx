@@ -24,6 +24,7 @@ import storage from '@react-native-firebase/storage';
 import {EventModel} from '../models/EventModel';
 import eventAPI from '../apis/eventApi';
 import {LoadingModal} from '../modals';
+import {DateTime} from '../utils/DateTime';
 
 const initValues = {
   title: '',
@@ -165,6 +166,9 @@ const AddNewScreen = ({navigation}: any) => {
 
     setIsCreating(true);
     try {
+      event.startAt = DateTime.GetEventTime(event.date, event.startAt);
+      event.endAt = DateTime.GetEventTime(event.date, event.endAt);
+
       const res = await eventAPI.HandleEvent(api, event, 'post');
 
       setIsCreating(false);

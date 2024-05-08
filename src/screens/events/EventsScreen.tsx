@@ -49,22 +49,11 @@ const EventsScreen = ({navigation}: any) => {
       title="Events"
       back
       right={
-        <RowComponent>
-          {/* <ButtonComponent
-            onPress={() => navigation.navigate('SearchEvents')}
-            icon={<SearchNormal1 size={20} color={appColors.text} />}
-          />
-          <SpaceComponent width={12} /> */}
-          <ButtonComponent
-            icon={
-              <MaterialIcons
-                name="more-vert"
-                size={22}
-                color={appColors.text}
-              />
-            }
-          />
-        </RowComponent>
+        <ButtonComponent
+          icon={
+            <MaterialIcons name="more-vert" size={22} color={appColors.text} />
+          }
+        />
       }>
       <FlatList
         contentContainerStyle={{flex: 1}}

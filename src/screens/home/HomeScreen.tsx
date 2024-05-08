@@ -18,12 +18,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Geocoder from 'react-native-geocoding';
+
 import Toast from 'react-native-toast-message';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import eventAPI from '../../apis/eventApi';
 import {
-  ButtonComponent,
   CategoriesList,
   CircleComponent,
   EventItem,
@@ -41,8 +40,6 @@ import {AddressModel} from '../../models/AddressModel';
 import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
 import {handleLinking} from '../../utils/handleLinking';
-
-Geocoder.init(process.env.MAP_API_KEY as string);
 
 const HomeScreen = ({navigation}: any) => {
   const [currentLocation, setCurrentLocation] = useState<AddressModel>();
@@ -290,7 +287,12 @@ const HomeScreen = ({navigation}: any) => {
         <SectionComponent styles={{paddingHorizontal: 0, paddingTop: 24}}>
           <TabBarComponent
             title="Upcoming Events"
-            onPress={() => navigation.navigate('ExploreEvents')}
+            onPress={() =>
+              navigation.navigate('ExploreEvents', {
+                key: 'upcoming',
+                title: 'Upcoming Events',
+              })
+            }
           />
           {events.length > 0 ? (
             <FlatList
@@ -337,7 +339,15 @@ const HomeScreen = ({navigation}: any) => {
           </ImageBackground>
         </SectionComponent>
         <SectionComponent styles={{paddingHorizontal: 0, paddingTop: 24}}>
-          <TabBarComponent title="Nearby You" onPress={() => {}} />
+          <TabBarComponent
+            title="Nearby You"
+            onPress={() =>
+              navigation.navigate('ExploreEvents', {
+                key: 'nearby',
+                title: 'Nearby You',
+              })
+            }
+          />
           {nearbyEvents.length > 0 ? (
             <FlatList
               showsHorizontalScrollIndicator={false}
