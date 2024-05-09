@@ -40,13 +40,14 @@ import {AddressModel} from '../../models/AddressModel';
 import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
 import {handleLinking} from '../../utils/handleLinking';
+import {ModalFilterEvents} from '../../modals';
 
 const HomeScreen = ({navigation}: any) => {
   const [currentLocation, setCurrentLocation] = useState<AddressModel>();
   const [events, setEvents] = useState<EventModel[]>([]);
   const [nearbyEvents, setNearbyEvents] = useState<EventModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [isVisibleModalFilter, setIsVisibleModalFilter] = useState(false);
   const [eventData, setEventData] = useState<EventModel[]>([]);
 
   const isFocused = useIsFocused();
@@ -256,10 +257,11 @@ const HomeScreen = ({navigation}: any) => {
             </RowComponent>
             <TagComponent
               bgColor={'#5D56F3'}
-              onPress={() =>
-                navigation.navigate('SearchEvents', {
-                  isFilter: true,
-                })
+              onPress={
+                () => setIsVisibleModalFilter(true)
+                // navigation.navigate('SearchEvents', {
+                //   isFilter: true,
+                // })
               }
               label="Filters"
               icon={
@@ -365,6 +367,11 @@ const HomeScreen = ({navigation}: any) => {
           )}
         </SectionComponent>
       </ScrollView>
+
+      <ModalFilterEvents
+        visible={isVisibleModalFilter}
+        onClose={() => setIsVisibleModalFilter(false)}
+      />
     </View>
   );
 };
