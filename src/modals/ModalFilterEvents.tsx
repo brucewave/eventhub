@@ -24,23 +24,42 @@ import {globalStyles} from '../styles/globalStyles';
 import {fontFamilies} from '../constants/fontFamilies';
 import {ArrowRight, ArrowRight2, Calendar} from 'iconsax-react-native';
 import DatePicker from 'react-native-date-picker';
+import {DateTime} from '../utils/DateTime';
+import {numberToString} from '../utils/numberToString';
 
 interface Props {
   visible: boolean;
   onClose: () => void;
-  onSelected?: (vals: string[]) => void;
-  seletected?: string[];
+  onFilter: (val: string) => void;
 }
 
 const ModalFilterEvents = (props: Props) => {
-  const {visible, onClose, onSelected, seletected} = props;
+  const {visible, onClose, onFilter} = props;
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [categorySelected, setCategorySelected] = useState<string[]>([]);
   const [isVisibleModalDate, setIsVisibleModalDate] = useState(false);
+  const [datetime, setDatetime] = useState<{
+    startAt: string;
+    endAt: string;
+  }>();
+  const [timeChoice, settimeChoice] = useState<
+    'today' | 'tomorrow' | 'thisWeek'
+  >();
 
   const modalizeRef = useRef<Modalize>();
   const auth = useSelector(authSelector);
+  const timeChoices = [
+    {key: 'today', label: 'Today'},
+    {
+      key: 'tomorrow',
+      label: 'Tomorrow',
+    },
+    {
+      key: 'thisWeek',
+      label: 'This week',
+    },
+  ];
 
   useEffect(() => {
     getCategories();
@@ -53,6 +72,32 @@ const ModalFilterEvents = (props: Props) => {
       modalizeRef.current?.close();
     }
   }, [visible]);
+
+  useEffect(() => {
+    if (timeChoice === 'today') {
+      const d = new Date();
+
+      const date = `${d.getFullYear()}-${numberToString(
+        d.getMonth() + 1,
+      )}-${numberToString(d.getDate())}`;
+
+      setDatetime({
+        startAt: `${date} 00:00:00`,
+        endAt: `${date} 23:59:59`,
+      });
+    } else if (timeChoice === 'tomorrow') {
+      const d = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      const date = `${d.getFullYear()}-${numberToString(
+        d.getMonth() + 1,
+      )}-${numberToString(d.getDate())}`;
+
+      setDatetime({
+        startAt: `${date} 00:00:00`,
+        endAt: `${date} 23:59:59`,
+      });
+    } else {
+    }
+  }, [timeChoice]);
 
   const getCategories = async () => {
     const api = `/get-categories`;
@@ -77,6 +122,15 @@ const ModalFilterEvents = (props: Props) => {
     }
 
     setCategorySelected(items);
+  };
+
+  const handleFilter = () => {
+    onFilter(
+      `/get-events?categoryId=${categorySelected.toString()}&${
+        datetime ? `startAt=${datetime.startAt}&endAt=${datetime.endAt}` : ''
+      }`,
+    );
+    onClose();
   };
 
   return (
@@ -147,18 +201,23 @@ const ModalFilterEvents = (props: Props) => {
             />
 
             <RowComponent styles={{marginVertical: 12}} justify="flex-start">
-              <TouchableOpacity
-                style={[globalStyles.button, localStyles.button]}>
-                <TextComponent text="Today" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[globalStyles.button, localStyles.button]}>
-                <TextComponent text="Tomorrow" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[globalStyles.button, localStyles.button]}>
-                <TextComponent text="This week" />
-              </TouchableOpacity>
+              {timeChoices.map((itemChoice: any) => (
+                <TouchableOpacity
+                  key={itemChoice.key}
+                  onPress={() => settimeChoice(itemChoice.key)}
+                  style={[
+                    globalStyles.button,
+                    localStyles.button,
+                    {
+                      borderColor:
+                        timeChoice === itemChoice.key
+                          ? appColors.primary
+                          : appColors.gray2,
+                    },
+                  ]}>
+                  <TextComponent text={itemChoice.label} />
+                </TouchableOpacity>
+              ))}
             </RowComponent>
             <RowComponent
               onPress={() => setIsVisibleModalDate(true)}
@@ -184,11 +243,17 @@ const ModalFilterEvents = (props: Props) => {
               <ButtonComponent
                 type="primary"
                 color="white"
-                onPress={() => {}}
+                onPress={() => {
+                  setCategorySelected([]);
+                }}
                 textColor={appColors.text}
                 text="Reset"
               />
-              <ButtonComponent type="primary" onPress={() => {}} text="Agree" />
+              <ButtonComponent
+                type="primary"
+                onPress={handleFilter}
+                text="Agree"
+              />
             </RowComponent>
           </SectionComponent>
         </Modalize>

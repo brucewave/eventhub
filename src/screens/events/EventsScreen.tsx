@@ -32,11 +32,11 @@ const EventsScreen = ({navigation}: any) => {
 
   const getEvents = async () => {
     const api = `/get-events${
-      eventType === 'upcoming' ? '?isUpcoming=true' : '?isPastEvents'
+      eventType === 'upcoming' ? '?isUpcoming=true' : '?isPastEvents=true'
     }`;
+
     try {
       const res: any = await eventAPI.HandleEvent(api);
-
       setEvents(res.data);
     } catch (error) {
       console.log(error);
@@ -86,7 +86,8 @@ const EventsScreen = ({navigation}: any) => {
             <MaterialIcons name="more-vert" size={22} color={appColors.text} />
           }
         />
-      }>
+      }
+      isScroll={false}>
       <RadioButtons
         selected={eventType}
         onSelect={(id: string) => setEventType(id)}
@@ -101,19 +102,22 @@ const EventsScreen = ({navigation}: any) => {
           },
         ]}
       />
+      {events.length > 0 ? (
+        <FlatList
+          data={events}
+          renderItem={({item}) => (
+            <EventItem
+              item={item}
+              key={item._id}
+              type="list"
+              styles={{flex: 1, width: undefined}}
+            />
+          )}
+        />
+      ) : (
+        renderEmptyCompnent
+      )}
 
-      <FlatList
-        data={events}
-        ListEmptyComponent={renderEmptyCompnent}
-        renderItem={({item}) => (
-          <EventItem
-            item={item}
-            key={item._id}
-            type="list"
-            styles={{flex: 1, width: undefined}}
-          />
-        )}
-      />
       <LoadingModal visible={isLoading} />
     </ContainerComponent>
   );
