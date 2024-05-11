@@ -26,6 +26,7 @@ import {ArrowRight, ArrowRight2, Calendar} from 'iconsax-react-native';
 import DatePicker from 'react-native-date-picker';
 import {DateTime} from '../utils/DateTime';
 import {numberToString} from '../utils/numberToString';
+import moment from 'moment';
 
 interface Props {
   visible: boolean;
@@ -96,6 +97,16 @@ const ModalFilterEvents = (props: Props) => {
         endAt: `${date} 23:59:59`,
       });
     } else {
+      const week = moment(new Date()).week();
+      const now = moment(new Date()).week(week);
+
+      const start = now.weekday(1).toISOString();
+      const end = now.weekday(7).toISOString();
+
+      setDatetime({
+        startAt: start,
+        endAt: end,
+      });
     }
   }, [timeChoice]);
 
@@ -220,7 +231,10 @@ const ModalFilterEvents = (props: Props) => {
               ))}
             </RowComponent>
             <RowComponent
-              onPress={() => setIsVisibleModalDate(true)}
+              onPress={() => {
+                settimeChoice(undefined);
+                setIsVisibleModalDate(true);
+              }}
               styles={[
                 globalStyles.button,
                 localStyles.button,
@@ -265,7 +279,17 @@ const ModalFilterEvents = (props: Props) => {
         date={new Date()}
         modal
         onCancel={() => setIsVisibleModalDate(false)}
-        onConfirm={val => console.log(val)}
+        onConfirm={val => {
+          const date = `${val.getFullYear()}-${numberToString(
+            val.getMonth() + 1,
+          )}-${numberToString(val.getDate())}`;
+          setDatetime({
+            startAt: `${date} 00:00:00`,
+            endAt: `${date} 23:59:59`,
+          });
+
+          setIsVisibleModalDate(false);
+        }}
       />
     </>
   );
