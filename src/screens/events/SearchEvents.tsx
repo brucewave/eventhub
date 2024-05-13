@@ -51,12 +51,11 @@ const SearchEvents = ({navigation, route}: any) => {
   };
 
   const handleSearchEvent = async (api: string) => {
-    console.log(api);
     setIsSearching(true);
     try {
       const res = await eventAPI.HandleEvent(api);
 
-      setResults(res.data);
+      setResults(res.data && res.data.length > 0 ? res.data : []);
       setIsSearching(false);
     } catch (error) {
       console.log(error);

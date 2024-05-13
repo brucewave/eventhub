@@ -1,8 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   FlatList,
   Image,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -12,6 +13,7 @@ import {useSelector} from 'react-redux';
 import eventAPI from '../apis/eventApi';
 import {
   ButtonComponent,
+  ChoiceLocation,
   RowComponent,
   SectionComponent,
   SpaceComponent,
@@ -27,6 +29,7 @@ import DatePicker from 'react-native-date-picker';
 import {DateTime} from '../utils/DateTime';
 import {numberToString} from '../utils/numberToString';
 import moment from 'moment';
+import RnRangeSlider from 'rn-range-slider';
 
 interface Props {
   visible: boolean;
@@ -47,6 +50,14 @@ const ModalFilterEvents = (props: Props) => {
   const [timeChoice, settimeChoice] = useState<
     'today' | 'tomorrow' | 'thisWeek'
   >();
+  const [postion, setPostion] = useState<{
+    lat: number;
+    long: number;
+  }>();
+  const [priceRange, setPriceRange] = useState<{
+    low: number;
+    high: number;
+  }>();
 
   const modalizeRef = useRef<Modalize>();
   const auth = useSelector(authSelector);
@@ -96,7 +107,7 @@ const ModalFilterEvents = (props: Props) => {
         startAt: `${date} 00:00:00`,
         endAt: `${date} 23:59:59`,
       });
-    } else {
+    } else if (timeChoice === 'thisWeek') {
       const week = moment(new Date()).week();
       const now = moment(new Date()).week(week);
 
@@ -107,6 +118,7 @@ const ModalFilterEvents = (props: Props) => {
         startAt: start,
         endAt: end,
       });
+    } else {
     }
   }, [timeChoice]);
 
@@ -135,10 +147,21 @@ const ModalFilterEvents = (props: Props) => {
     setCategorySelected(items);
   };
 
+  const handleValueChange = useCallback((low: number, high: number) => {
+    setPriceRange({
+      low,
+      high,
+    });
+  }, []);
+
   const handleFilter = () => {
     onFilter(
       `/get-events?categoryId=${categorySelected.toString()}&${
         datetime ? `startAt=${datetime.startAt}&endAt=${datetime.endAt}` : ''
+      }${postion ? `&lat=${postion.lat}&long=${postion.long}&distance=5` : ''}${
+        priceRange
+          ? `&minPrice=${priceRange.low}&maxPrice=${priceRange.high}`
+          : ''
       }`,
     );
     onClose();
@@ -251,6 +274,62 @@ const ModalFilterEvents = (props: Props) => {
               />
               <ArrowRight2 color={appColors.primary} size={20} />
             </RowComponent>
+            <TextComponent
+              text="Location"
+              flex={1}
+              size={16}
+              font={fontFamilies.medium}
+              styles={{paddingHorizontal: 8, marginTop: 16, marginBottom: 12}}
+            />
+            <ChoiceLocation onSelect={val => setPostion(val.postion)} />
+
+            <RowComponent
+              styles={{paddingHorizontal: 8, marginTop: 16, marginBottom: 12}}>
+              <TextComponent
+                text="Price range"
+                flex={1}
+                size={16}
+                font={fontFamilies.medium}
+              />
+              <TextComponent
+                color={appColors.primary}
+                font={fontFamilies.medium}
+                text={`$${priceRange?.low} - $${priceRange?.high}`}
+              />
+            </RowComponent>
+            <RowComponent>
+              <TextComponent text={'0'} />
+              <View style={{flex: 1, paddingHorizontal: 12}}>
+                <RnRangeSlider
+                  min={0}
+                  max={100}
+                  step={10}
+                  style={{
+                    // flex: 1,
+                    height: 5,
+                    justifyContent: 'center',
+                    // alignItems: 'center',
+                    borderRadius: 10,
+                    backgroundColor: appColors.gray2,
+                  }}
+                  renderThumb={() => (
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 100,
+                        backgroundColor: appColors.primary,
+                      }}
+                    />
+                  )}
+                  renderRail={() => null}
+                  renderRailSelected={() => null}
+                  onValueChanged={handleValueChange}
+                />
+              </View>
+              <TextComponent text={'100'} />
+            </RowComponent>
+            <SpaceComponent height={16} />
           </SectionComponent>
           <SectionComponent>
             <RowComponent>
