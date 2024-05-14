@@ -302,7 +302,7 @@ const ModalFilterEvents = (props: Props) => {
               <View style={{flex: 1, paddingHorizontal: 12}}>
                 <RnRangeSlider
                   min={0}
-                  max={100}
+                  max={5000}
                   step={10}
                   style={{
                     // flex: 1,
