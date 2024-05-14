@@ -1,16 +1,16 @@
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
 import React, {useEffect, useState} from 'react';
+import {Linking} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthState, addAuth, authSelector} from '../redux/reducers/authReducer';
 import {SplashScreen} from '../screens';
 import {UserHandle} from '../utils/UserHandlers';
 import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
-import {TextComponent} from '../components';
-import {Linking} from 'react-native';
 
 const AppRouters = () => {
   const [isShowSplash, setIsShowSplash] = useState(true);
+  const [isOnline, setIsOnline] = useState<boolean>();
 
   const {getItem} = useAsyncStorage('auth');
 
@@ -19,9 +19,15 @@ const AppRouters = () => {
 
   useEffect(() => {
     handleGetDatas();
-
     handleInitialUrl();
   }, []);
+
+  useEffect(() => {
+    if (auth.id) {
+      UserHandle.getFollowersById(auth.id, dispatch);
+      UserHandle.getFollowingByUid(auth.id, dispatch);
+    }
+  }, [auth.id]);
 
   const handleInitialUrl = async () => {
     try {
@@ -36,12 +42,6 @@ const AppRouters = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    if (auth.id) {
-      UserHandle.getFollowersById(auth.id, dispatch);
-      UserHandle.getFollowingByUid(auth.id, dispatch);
-    }
-  }, [auth.id]);
 
   const handleGetDatas = async () => {
     await checkLogin();

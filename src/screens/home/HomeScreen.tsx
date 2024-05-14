@@ -12,9 +12,11 @@ import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   ImageBackground,
+  Modal,
   Platform,
   ScrollView,
   StatusBar,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -23,6 +25,7 @@ import Toast from 'react-native-toast-message';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import eventAPI from '../../apis/eventApi';
 import {
+  ButtonComponent,
   CategoriesList,
   CircleComponent,
   EventItem,
@@ -40,7 +43,7 @@ import {AddressModel} from '../../models/AddressModel';
 import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
 import {handleLinking} from '../../utils/handleLinking';
-import {ModalFilterEvents} from '../../modals';
+import NetInfo from '@react-native-community/netinfo';
 
 const HomeScreen = ({navigation}: any) => {
   const [currentLocation, setCurrentLocation] = useState<AddressModel>();
@@ -48,6 +51,7 @@ const HomeScreen = ({navigation}: any) => {
   const [nearbyEvents, setNearbyEvents] = useState<EventModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [eventData, setEventData] = useState<EventModel[]>([]);
+  const [isOnline, setIsOnline] = useState<boolean>();
 
   const isFocused = useIsFocused();
 
@@ -86,6 +90,8 @@ const HomeScreen = ({navigation}: any) => {
         const id = mess && mess.data ? mess.data.id : '';
         id && handleLinking(`eventhub://app/detail/${mess.data.id}`);
       });
+
+    checkNetWork();
   }, []);
 
   useEffect(() => {
@@ -98,6 +104,12 @@ const HomeScreen = ({navigation}: any) => {
       getNearByEvents();
     }
   }, [isFocused]);
+
+  const checkNetWork = () => {
+    NetInfo.addEventListener(state => {
+      setIsOnline(state.isConnected ?? false);
+    });
+  };
 
   const getNearByEvents = () => {
     currentLocation &&
@@ -359,6 +371,12 @@ const HomeScreen = ({navigation}: any) => {
           )}
         </SectionComponent>
       </ScrollView>
+
+      <Modal animationType="fade" style={[{flex: 1}]} visible={!isOnline}>
+        <View style={[globalStyles.center, {flex: 1}]}>
+          <Text>Network error</Text>
+        </View>
+      </Modal>
     </View>
   );
 };
