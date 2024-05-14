@@ -1,3 +1,5 @@
+import { appInfo } from "./constants/appInfos";
+
 const config = {
   screens: {
     NotFound: '*',
@@ -19,7 +21,7 @@ const config = {
 };
 
 const linking: any = {
-  prefixes: ['eventhub://app', 'https://eventhub.com'],
+  prefixes: [appInfo.domain],
   config,
 };
 

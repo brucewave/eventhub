@@ -7,6 +7,7 @@ import {UserHandle} from '../utils/UserHandlers';
 import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
 import {TextComponent} from '../components';
+import {Linking} from 'react-native';
 
 const AppRouters = () => {
   const [isShowSplash, setIsShowSplash] = useState(true);
@@ -18,8 +19,23 @@ const AppRouters = () => {
 
   useEffect(() => {
     handleGetDatas();
+
+    handleInitialUrl();
   }, []);
 
+  const handleInitialUrl = async () => {
+    try {
+      const url = await Linking.getInitialURL();
+
+      if (url) {
+        Linking.canOpenURL(url).then(isCanOpen =>
+          isCanOpen ? Linking.openURL(url) : console.log('Can not open link'),
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (auth.id) {
       UserHandle.getFollowersById(auth.id, dispatch);

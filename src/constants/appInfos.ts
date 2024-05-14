@@ -6,6 +6,7 @@ export const appInfo = {
     HEIGHT: Dimensions.get('window').height,
   },
   BASE_URL: 'http://192.168.1.244:3001',
+  domain: 'https://devtogerther.netlify.app',
   GoogleApiKey: 'AIzaSyCbtwJ3e1wGs0RcFkgQPtaLwg0P4XxkELA',
   monthNames: [
     'January',
