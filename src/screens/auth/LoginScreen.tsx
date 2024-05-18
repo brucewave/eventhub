@@ -1,6 +1,8 @@
-import {Cake, Lock, Sms} from 'iconsax-react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Lock, Sms} from 'iconsax-react-native';
 import React, {useEffect, useState} from 'react';
-import {Alert, Image, Switch, TouchableOpacity} from 'react-native';
+import {Alert, Image, Switch} from 'react-native';
+import {useDispatch} from 'react-redux';
 import authenticationAPI from '../../apis/authApi';
 import {
   ButtonComponent,
@@ -12,13 +14,10 @@ import {
   TextComponent,
 } from '../../components';
 import {appColors} from '../../constants/appColors';
+import {LoadingModal} from '../../modals';
+import {addAuth} from '../../redux/reducers/authReducer';
 import {Validate} from '../../utils/validate';
 import SocialLogin from './components/SocialLogin';
-import {useDispatch} from 'react-redux';
-import {addAuth} from '../../redux/reducers/authReducer';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {LoadingModal} from '../../modals';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const LoginScreen = ({navigation}: any) => {
   const [email, setEmail] = useState('');

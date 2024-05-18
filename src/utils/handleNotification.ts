@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import userAPI from '../apis/userApi';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
 export class HandleNotification {
   static checkNotificationPersion = async () => {
@@ -13,7 +13,7 @@ export class HandleNotification {
     ) {
       if (Platform.OS === 'ios') {
         try {
-          await messaging().registerDeviceForRemoteMessages();
+          // await messaging().registerDeviceForRemoteMessages();
         } catch (error) {
           console.log(error);
         }
@@ -43,7 +43,7 @@ export class HandleNotification {
 
     if (res) {
       const auth = JSON.parse(res);
-      const {fcmTokens} = auth;
+      const { fcmTokens } = auth;
 
       if (fcmTokens && !fcmTokens.includes(token)) {
         fcmTokens.push(token);

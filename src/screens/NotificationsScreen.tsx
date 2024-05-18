@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Image, Text, View} from 'react-native';
+import {ActivityIndicator, FlatList, Image, Text, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 import {
   AvatarComponent,
   ButtonComponent,
   ContainerComponent,
+  NotificationItem,
   RowComponent,
   SectionComponent,
   SpaceComponent,
@@ -16,18 +17,25 @@ import {fontFamilies} from '../constants/fontFamilies';
 import {authSelector} from '../redux/reducers/authReducer';
 import {globalStyles} from '../styles/globalStyles';
 import firestore from '@react-native-firebase/firestore';
+import {NotificationModel} from '../models/NotificationModel';
+import {LoadingModal} from '../modals';
 
 const NotificationsScreen = () => {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<NotificationModel[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const user = useSelector(authSelector);
 
   useEffect(() => {
+    setIsLoading(true);
     firestore()
       .collection('notifcation')
-      .where('idRead', '==', false)
       .where('uid', '==', user.id)
       .onSnapshot(snap => {
         if (snap.empty) {
           setNotifications([]);
+          setIsLoading(false);
         } else {
           const items: any = [];
 
@@ -39,28 +47,26 @@ const NotificationsScreen = () => {
           );
 
           setNotifications(items);
+          setIsLoading(false);
         }
       });
   }, []);
 
-  const user = useSelector(authSelector);
-  const notification = {
-    from: '65b61a57ac0bd3479732238b',
-    to: '',
-    createdAt: Date.now(),
-    content: 'Invite A virtual Evening of Smooth Jazz',
-    eventId: '',
-    idRead: false,
+  const handleChecktoReadAllNotification = () => {
+    setIsUpdating(true);
+    try {
+      notifications.forEach(async item => {
+        await firestore().collection('notifcation').doc(item.id).update({
+          idRead: true,
+        });
+      });
+
+      setIsUpdating(false);
+    } catch (error) {
+      console.log(error);
+      setIsUpdating(false);
+    }
   };
-
-  useEffect(() => {
-    const items: any = [];
-    Array.from({length: 100}).forEach(item =>
-      items.push({...notification, id: Math.floor(Math.random() * 100000)}),
-    );
-
-    setNotifications(items);
-  }, []);
 
   return (
     <ContainerComponent
@@ -69,66 +75,24 @@ const NotificationsScreen = () => {
       title="Notifications"
       right={
         <ButtonComponent
+          onPress={handleChecktoReadAllNotification}
           icon={
-            <Feather name="more-vertical" size={20} color={appColors.text} />
+            <Feather name="check-square" size={20} color={appColors.text} />
           }
         />
       }>
-      {notifications.length > 0 ? (
+      {isLoading ? (
+        <SectionComponent styles={[globalStyles.center, {flex: 1}]}>
+          <ActivityIndicator color={appColors.gray2} />
+          <TextComponent text="Loading..." color={appColors.gray} />
+        </SectionComponent>
+      ) : notifications.length > 0 ? (
         <>
           <FlatList
             style={{paddingTop: 20}}
             data={notifications}
             renderItem={({item, index}) => (
-              <RowComponent
-                key={`notification${index}`}
-                styles={{
-                  paddingHorizontal: 16,
-                  marginBottom: 20,
-                  alignItems: 'flex-start',
-                }}>
-                <AvatarComponent
-                  size={45}
-                  name="faf"
-                  photoURL="https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png"
-                />
-                <View
-                  style={{flex: 1, paddingHorizontal: 12, paddingRight: 28}}>
-                  <Text
-                    style={[
-                      globalStyles.text,
-                      {color: 'coral', fontFamily: 'AirbnbCereal_W_Md'},
-                    ]}>
-                    {'fafafa '}
-                    <Text style={[globalStyles.text]}>{item.content}</Text>
-                  </Text>
-                  <SpaceComponent height={16} />
-                  <RowComponent
-                    styles={{justifyContent: 'center', alignItems: 'center'}}>
-                    <ButtonComponent
-                      text="Reject"
-                      type="primary"
-                      styles={[
-                        globalStyles.center,
-                        {
-                          borderWidth: 1,
-                          borderColor: appColors.gray2,
-                          paddingVertical: 10,
-                          backgroundColor: appColors.white,
-                        },
-                      ]}
-                      textColor={appColors.gray}
-                      textStyles={{fontWeight: '400'}}
-                    />
-                    <ButtonComponent
-                      text="Accept"
-                      type="primary"
-                      styles={{paddingVertical: 10}}
-                    />
-                  </RowComponent>
-                </View>
-                <TextComponent color={appColors.gray} text="fafafa" />
-              </RowComponent>
+              <NotificationItem item={item} key={item.id} />
             )}
           />
         </>
@@ -155,6 +119,7 @@ const NotificationsScreen = () => {
           />
         </SectionComponent>
       )}
+      <LoadingModal visible={isUpdating} />
     </ContainerComponent>
   );
 };
