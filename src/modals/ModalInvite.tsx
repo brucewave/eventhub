@@ -23,10 +23,11 @@ interface Props {
   onClose: () => void;
   eventId: string;
   title: string;
+  joined: string[];
 }
 
 const ModalInvite = (props: Props) => {
-  const {visible, onClose, eventId, title} = props;
+  const {visible, onClose, eventId, title, joined} = props;
 
   const [friendIds, setFriendIds] = useState<string[]>([]);
   const [useSelected, setUseSelected] = useState<string[]>([]);
@@ -134,27 +135,30 @@ const ModalInvite = (props: Props) => {
             onChange={val => console.log('')}
           />
           {friendIds.length ? (
-            friendIds.map((id: string) => (
-              <RowComponent key={id}>
-                <View style={{flex: 1}}>
-                  <UserComponent
-                    type="Invite"
-                    onPress={() => handleSelectedId(id)}
-                    userId={id}
-                  />
-                </View>
+            friendIds.map(
+              (id: string) =>
+                !joined.includes(id) && (
+                  <RowComponent key={id}>
+                    <View style={{flex: 1}}>
+                      <UserComponent
+                        type="Invite"
+                        onPress={() => handleSelectedId(id)}
+                        userId={id}
+                      />
+                    </View>
 
-                <TickCircle
-                  variant="Bold"
-                  size={24}
-                  color={
-                    useSelected.includes(id)
-                      ? appColors.primary
-                      : appColors.gray2
-                  }
-                />
-              </RowComponent>
-            ))
+                    <TickCircle
+                      variant="Bold"
+                      size={24}
+                      color={
+                        useSelected.includes(id)
+                          ? appColors.primary
+                          : appColors.gray2
+                      }
+                    />
+                  </RowComponent>
+                ),
+            )
           ) : (
             <TextComponent text="No friends" />
           )}

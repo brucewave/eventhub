@@ -14,6 +14,9 @@ import userAPI from '../apis/userApi';
 import {ProfileModel} from '../models/ProfileModel';
 import {DateTime} from '../utils/DateTime';
 import firestore from '@react-native-firebase/firestore';
+import {useSelector} from 'react-redux';
+import {authSelector} from '../redux/reducers/authReducer';
+import eventAPI from '../apis/eventApi';
 
 interface Props {
   item: NotificationModel;
@@ -22,6 +25,10 @@ const NotificationItem = (props: Props) => {
   const {item} = props;
   const [profile, setProfile] = useState<ProfileModel>();
   const [isLoading, setIsLoading] = useState(false);
+
+  const ref = firestore().collection('notifcation').doc(item.id);
+
+  const user = useSelector(authSelector);
 
   useEffect(() => {
     getUserDetail();
@@ -42,8 +49,22 @@ const NotificationItem = (props: Props) => {
 
   const handleRemoveNotification = async () => {
     try {
-      await firestore().collection('notifcation').doc(item.id).delete();
+      await ref.delete();
       console.log('Done');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleJoinEvent = async () => {
+    const api = `/join-event?eventId=${item.eventId}&uid=${user.id}`;
+
+    try {
+      const res = await eventAPI.HandleEvent(api);
+
+      await ref.update({
+        idRead: true,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +136,7 @@ const NotificationItem = (props: Props) => {
               textStyles={{fontWeight: '400'}}
             />
             <ButtonComponent
+              onPress={handleJoinEvent}
               text="Accept"
               type="primary"
               styles={{paddingVertical: 10}}

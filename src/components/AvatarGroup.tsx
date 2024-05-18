@@ -17,7 +17,7 @@ const AvatarGroup = (props: Props) => {
     <RowComponent justify="flex-start" styles={{marginVertical: 12}}>
       {userIds.length > 0 && (
         <>
-          {Array.from({length: 3}).map((item, index) => (
+          {userIds.map((item, index) => (
             <Image
               key={`img${index}`}
               source={{uri: photoUrl}}
@@ -32,8 +32,9 @@ const AvatarGroup = (props: Props) => {
             />
           ))}
           <SpaceComponent width={12} />
+
           <TextComponent
-            text="+20 Going"
+            text={`${userIds.length > 3 ? `+${userIds.length - 3}` : ''} Going`}
             size={12 + (size ? (size - 24) / 5 : 0)}
             color={appColors.primary}
             font={fontFamilies.semiBold}

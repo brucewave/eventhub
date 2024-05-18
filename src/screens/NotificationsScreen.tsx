@@ -74,12 +74,14 @@ const NotificationsScreen = () => {
       back
       title="Notifications"
       right={
-        <ButtonComponent
-          onPress={handleChecktoReadAllNotification}
-          icon={
-            <Feather name="check-square" size={20} color={appColors.text} />
-          }
-        />
+        notifications.filter(element => !element.idRead).length > 0 && (
+          <ButtonComponent
+            onPress={handleChecktoReadAllNotification}
+            icon={
+              <Feather name="check-square" size={20} color={appColors.text} />
+            }
+          />
+        )
       }>
       {isLoading ? (
         <SectionComponent styles={[globalStyles.center, {flex: 1}]}>
