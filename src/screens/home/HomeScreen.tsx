@@ -44,6 +44,9 @@ import {EventModel} from '../../models/EventModel';
 import {globalStyles} from '../../styles/globalStyles';
 import {handleLinking} from '../../utils/handleLinking';
 import NetInfo from '@react-native-community/netinfo';
+import firestore from '@react-native-firebase/firestore';
+import {useSelector} from 'react-redux';
+import {authSelector} from '../../redux/reducers/authReducer';
 
 const HomeScreen = ({navigation}: any) => {
   const [currentLocation, setCurrentLocation] = useState<AddressModel>();
@@ -52,8 +55,10 @@ const HomeScreen = ({navigation}: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [eventData, setEventData] = useState<EventModel[]>([]);
   const [isOnline, setIsOnline] = useState<boolean>();
+  const [unReadNotifications, setUnReadNotifications] = useState([]);
 
   const isFocused = useIsFocused();
+  const user = useSelector(authSelector);
 
   useEffect(() => {
     GeoLocation.getCurrentPosition(
@@ -92,6 +97,27 @@ const HomeScreen = ({navigation}: any) => {
       });
 
     checkNetWork();
+
+    firestore()
+      .collection('notifcation')
+      .where('idRead', '==', false)
+      .where('uid', '==', user.id)
+      .onSnapshot(snap => {
+        if (snap.empty) {
+          setUnReadNotifications([]);
+        } else {
+          const items: any = [];
+
+          snap.forEach(item =>
+            items.push({
+              id: item.id,
+              ...item.data(),
+            }),
+          );
+
+          setUnReadNotifications(items);
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -218,22 +244,27 @@ const HomeScreen = ({navigation}: any) => {
               )}
             </View>
 
-            <CircleComponent color="#524CE0" size={36}>
+            <CircleComponent
+              onPress={() => navigation.navigate('NotificationsScreen')}
+              color="#524CE0"
+              size={36}>
               <View>
                 <Notification size={18} color={appColors.white} />
-                <View
-                  style={{
-                    backgroundColor: '#02E9FE',
-                    width: 10,
-                    height: 10,
-                    borderRadius: 4,
-                    borderWidth: 2,
-                    borderColor: '#524CE0',
-                    position: 'absolute',
-                    top: -2,
-                    right: -2,
-                  }}
-                />
+                {unReadNotifications.length > 0 && (
+                  <View
+                    style={{
+                      backgroundColor: '#02E9FE',
+                      width: 10,
+                      height: 10,
+                      borderRadius: 4,
+                      borderWidth: 2,
+                      borderColor: '#524CE0',
+                      position: 'absolute',
+                      top: -2,
+                      right: -2,
+                    }}
+                  />
+                )}
               </View>
             </CircleComponent>
           </RowComponent>

@@ -16,15 +16,17 @@ import {
 import {appColors} from '../constants/appColors';
 import {fontFamilies} from '../constants/fontFamilies';
 import {authSelector} from '../redux/reducers/authReducer';
+import firestore from '@react-native-firebase/firestore';
 
 interface Props {
   visible: boolean;
   onClose: () => void;
   eventId: string;
+  title: string;
 }
 
 const ModalInvite = (props: Props) => {
-  const {visible, onClose, eventId} = props;
+  const {visible, onClose, eventId, title} = props;
 
   const [friendIds, setFriendIds] = useState<string[]>([]);
   const [useSelected, setUseSelected] = useState<string[]>([]);
@@ -59,26 +61,6 @@ const ModalInvite = (props: Props) => {
     setUseSelected(items);
   };
 
-  const onShare = async () => {
-    try {
-      const result = await Share.share({
-        message:
-          'React Native | A framework for building native apps using React',
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error: any) {
-      Alert.alert(error.message);
-    }
-  };
-
   const handleSendInviteNotification = async () => {
     if (useSelected.length > 0) {
       const api = `/send-invite`;
@@ -88,10 +70,29 @@ const ModalInvite = (props: Props) => {
           api,
           {
             ids: useSelected,
-            eventId: '',
+            eventId,
           },
           'post',
         );
+
+        const data: any = {
+          from: auth.id,
+          createdAt: Date.now(),
+          content: `Invite A virtual Evening of ${title}`,
+          eventId,
+          idRead: false,
+        };
+
+        useSelected.forEach(async id => {
+          console.log(id);
+          await firestore()
+            .collection('notifcation')
+            .add({...data, uid: id});
+
+          console.log('Created notifition done!');
+        });
+
+        onClose();
       } catch (error) {
         console.log(error);
       }
@@ -111,7 +112,6 @@ const ModalInvite = (props: Props) => {
             <ButtonComponent
               text="Invite"
               onPress={() => {
-                onShare();
                 handleSendInviteNotification();
               }}
               type="primary"

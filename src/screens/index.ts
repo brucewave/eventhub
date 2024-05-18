@@ -1,5 +1,6 @@
 import AddNewScreen from './AddNewScreen';
 import NotFound from './NotFound';
+import NotificationsScreen from './NotificationsScreen';
 import SplashScreen from './SplashScreen';
 import ForgotPassword from './auth/ForgotPassword';
 import LoginScreen from './auth/LoginScreen';
@@ -34,4 +35,5 @@ export {
   ExploreEvents,
   CategoryDetail,
   PaymentScreen,
+  NotificationsScreen
 };
