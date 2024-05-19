@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image} from 'react-native';
-import {RowComponent, SpaceComponent, TextComponent} from '.';
+import {AvatarComponent, RowComponent, SpaceComponent, TextComponent} from '.';
 import {appColors} from '../constants/appColors';
 import {fontFamilies} from '../constants/fontFamilies';
 
@@ -18,18 +18,27 @@ const AvatarGroup = (props: Props) => {
       {userIds.length > 0 && (
         <>
           {userIds.map((item, index) => (
-            <Image
-              key={`img${index}`}
-              source={{uri: photoUrl}}
-              style={{
-                width: size ?? 24,
-                height: size ?? 24,
-                borderRadius: 100,
+            <AvatarComponent
+              uid={item}
+              styles={{
                 borderWidth: 1,
                 borderColor: appColors.white,
                 marginLeft: index > 0 ? -8 : 0,
               }}
             />
+
+            // <Image
+            //   key={`img${index}`}
+            //   source={{uri: photoUrl}}
+            //   style={{
+            //     width: size ?? 24,
+            //     height: size ?? 24,
+            //     borderRadius: 100,
+            //     borderWidth: 1,
+            //     borderColor: appColors.white,
+            //     marginLeft: index > 0 ? -8 : 0,
+            //   }}
+            // />
           ))}
           <SpaceComponent width={12} />
 

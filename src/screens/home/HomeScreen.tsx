@@ -95,7 +95,6 @@ const HomeScreen = ({navigation}: any) => {
       .then((mess: any) => {
         const id = mess && mess.data ? mess.data.id : '';
         id && handleLinking(`${appInfo.domain}/detail/${mess.data.id}`);
-        console.log(`${appInfo.domain}/detail/${mess.data.id}`);
       });
 
     checkNetWork();

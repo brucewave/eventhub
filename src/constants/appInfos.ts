@@ -5,7 +5,8 @@ export const appInfo = {
     WIDTH: Dimensions.get('window').width,
     HEIGHT: Dimensions.get('window').height,
   },
-  BASE_URL: 'http://192.168.1.15:3001',
+  // BASE_URL: 'http://192.168.1.15:3001',
+  BASE_URL: 'https://eventhub-sever.onrender.com',
   domain: 'https://devtogerther.netlify.app',
   GoogleApiKey: 'AIzaSyCbtwJ3e1wGs0RcFkgQPtaLwg0P4XxkELA',
   monthNames: [
