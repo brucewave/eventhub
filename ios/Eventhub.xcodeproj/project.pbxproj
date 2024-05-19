@@ -16,13 +16,13 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		147AD4D21E8048AC8085C319 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F572736D8D74E3C8A7D47D5 /* Fontisto.ttf */; };
-		267D4F96A0BE5CFB28282FA8 /* Pods_evenhub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F08CF63A2C2E9727103A34C /* Pods_evenhub.framework */; };
 		276944845FF748C49F99C242 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F89137666C934D56A8A54E3D /* MaterialIcons.ttf */; };
 		334446D722B64F40BE13DF2D /* AirbnbCereal_W_Bk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E8803AC43484390815A9E49 /* AirbnbCereal_W_Bk.otf */; };
 		39EAB5B0DC9840579AF01B07 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0D6CB5039164C2CA2D2C9A7 /* Feather.ttf */; };
 		43016351A710408E9CF9E7CE /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43DE2B16555F4017BE6ECC04 /* FontAwesome5_Solid.ttf */; };
 		481D16A548524023B26BC83F /* AirbnbCereal_W_XBd.otf in Resources */ = {isa = PBXBuildFile; fileRef = C63FF87A3FA5435E94AA5AA3 /* AirbnbCereal_W_XBd.otf */; };
 		4FD8595F66BB4ED1B297CAB4 /* FontAwesome6_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5A7ECD93F4C4FEC9B70C471 /* FontAwesome6_Regular.ttf */; };
+		5900697E01553D13FD4E76BF /* Pods_Eventhub_EventhubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB44A35183BA5C2251A7E77F /* Pods_Eventhub_EventhubTests.framework */; };
 		5DB94CA045AF471AB834D618 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE054E9841D94A4DBFB29B18 /* Octicons.ttf */; };
 		6677967A444A4D41A8ED1461 /* AirbnbCereal_W_Lt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1AF231334BA4ABF829AD213 /* AirbnbCereal_W_Lt.otf */; };
 		74EAEE03B38941ABB3850FF4 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EC3366118D14AB7BFE8E53D /* FontAwesome5_Brands.ttf */; };
@@ -31,10 +31,10 @@
 		8A3305A838B64F038DA9FE72 /* AirbnbCereal_W_Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 075493BD5F5D459CB0FB84E4 /* AirbnbCereal_W_Bd.otf */; };
 		8E47E57438704F0EB6D40DEA /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 131104CD4F3F4E928A47BDEC /* Foundation.ttf */; };
 		92C3DF52D653424AA7D206D1 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8DDCBBA0CDF4DB598428687 /* MaterialCommunityIcons.ttf */; };
+		9DFCE360580CD4513F61D01D /* Pods_Eventhub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE2FF92C9F13003CEB04B4B /* Pods_Eventhub.framework */; };
 		A62A401665994D6AA8CA8476 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEE500A2AAEE4B7E9F834BC9 /* Ionicons.ttf */; };
 		AE3ED62C8C184E45BBC192AD /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 285A99398F64493094E75302 /* FontAwesome.ttf */; };
 		D3367C67DB18467BBD929FFA /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A43CD611E8415EA9FEC8F4 /* SimpleLineIcons.ttf */; };
-		D40DB4F22490655DFDF03B22 /* Pods_evenhub_evenhubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F469CCBEBF07CF0E6A47209 /* Pods_evenhub_evenhubTests.framework */; };
 		D5C4D9281CC84246B2ECC8AD /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BBD87A1414B4D51BB1099B2 /* FontAwesome6_Brands.ttf */; };
 		E6217AC8264441F2B474E504 /* AirbnbCereal_W_Md.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB379DAA2A9A46819E20A236 /* AirbnbCereal_W_Md.otf */; };
 		E6C6DAE4F0F24C0FB68EB4A2 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 107CDA0950D74C53BFD33970 /* EvilIcons.ttf */; };
@@ -48,27 +48,26 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = "Eventhub";
+			remoteInfo = Eventhub;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* EventhubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EventhubTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* EventhubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventhubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* EventhubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "EventhubTests.m"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* EventhubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventhubTests.m; sourceTree = "<group>"; };
 		011404402B8B2E0300621E98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Eventhub/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0192641B2B69EA0200A95707 /* Eventhub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Eventhub.entitlements; path = Eventhub/Eventhub.entitlements; sourceTree = "<group>"; };
 		075493BD5F5D459CB0FB84E4 /* AirbnbCereal_W_Bd.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Bd.otf; path = ../assets/fonts/AirbnbCereal_W_Bd.otf; sourceTree = "<group>"; };
 		107CDA0950D74C53BFD33970 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
 		131104CD4F3F4E928A47BDEC /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../assets/fonts/Foundation.ttf; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Eventhub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eventhub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "Eventhub/AppDelegate.h"; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "Eventhub/AppDelegate.mm"; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Eventhub/Images.xcassets"; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Eventhub/Info.plist"; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Eventhub/main.m"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Eventhub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eventhub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Eventhub/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Eventhub/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Eventhub/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Eventhub/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Eventhub/main.m; sourceTree = "<group>"; };
 		285A99398F64493094E75302 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
-		2F08CF63A2C2E9727103A34C /* Pods_evenhub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_evenhub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-Eventhub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eventhub.debug.xcconfig"; path = "Target Support Files/Pods-Eventhub/Pods-Eventhub.debug.xcconfig"; sourceTree = "<group>"; };
 		3BBD87A1414B4D51BB1099B2 /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Brands.ttf; path = ../assets/fonts/FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
 		43754CB511D9425A97E4B4B5 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
@@ -77,15 +76,15 @@
 		5B7EB9410499542E8C5724F5 /* Pods-Eventhub-EventhubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eventhub-EventhubTests.debug.xcconfig"; path = "Target Support Files/Pods-Eventhub-EventhubTests/Pods-Eventhub-EventhubTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E8803AC43484390815A9E49 /* AirbnbCereal_W_Bk.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Bk.otf; path = ../assets/fonts/AirbnbCereal_W_Bk.otf; sourceTree = "<group>"; };
 		789F612A024449D6B9A0EDCB /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = ../assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
-		7F469CCBEBF07CF0E6A47209 /* Pods_evenhub_evenhubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_evenhub_evenhubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F572736D8D74E3C8A7D47D5 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = ../assets/fonts/Fontisto.ttf; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Eventhub/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Eventhub/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Eventhub-EventhubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eventhub-EventhubTests.release.xcconfig"; path = "Target Support Files/Pods-Eventhub-EventhubTests/Pods-Eventhub-EventhubTests.release.xcconfig"; sourceTree = "<group>"; };
 		8EC3366118D14AB7BFE8E53D /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = ../assets/fonts/FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
 		A8DDCBBA0CDF4DB598428687 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		AB379DAA2A9A46819E20A236 /* AirbnbCereal_W_Md.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Md.otf; path = ../assets/fonts/AirbnbCereal_W_Md.otf; sourceTree = "<group>"; };
 		B3BFB07E17634C5A80AE9BCB /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = ../assets/fonts/FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
 		BD3C604935D74F11B9077A4D /* FontAwesome6_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Solid.ttf; path = ../assets/fonts/FontAwesome6_Solid.ttf; sourceTree = "<group>"; };
+		BEE2FF92C9F13003CEB04B4B /* Pods_Eventhub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eventhub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63FF87A3FA5435E94AA5AA3 /* AirbnbCereal_W_XBd.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_XBd.otf; path = ../assets/fonts/AirbnbCereal_W_XBd.otf; sourceTree = "<group>"; };
 		CE054E9841D94A4DBFB29B18 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		D0D6CB5039164C2CA2D2C9A7 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../assets/fonts/Feather.ttf; sourceTree = "<group>"; };
@@ -97,6 +96,7 @@
 		F1AF231334BA4ABF829AD213 /* AirbnbCereal_W_Lt.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Lt.otf; path = ../assets/fonts/AirbnbCereal_W_Lt.otf; sourceTree = "<group>"; };
 		F6D4B6A2CB324DFFAC31E0E3 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = ../assets/fonts/Entypo.ttf; sourceTree = "<group>"; };
 		F89137666C934D56A8A54E3D /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = ../assets/fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
+		FB44A35183BA5C2251A7E77F /* Pods_Eventhub_EventhubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eventhub_EventhubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D40DB4F22490655DFDF03B22 /* Pods_evenhub_evenhubTests.framework in Frameworks */,
+				5900697E01553D13FD4E76BF /* Pods_Eventhub_EventhubTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				267D4F96A0BE5CFB28282FA8 /* Pods_evenhub.framework in Frameworks */,
+				9DFCE360580CD4513F61D01D /* Pods_Eventhub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +125,7 @@
 				00E356F21AD99517003FC87E /* EventhubTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = "EventhubTests";
+			path = EventhubTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -147,15 +147,15 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = "Eventhub";
+			name = Eventhub;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				2F08CF63A2C2E9727103A34C /* Pods_evenhub.framework */,
-				7F469CCBEBF07CF0E6A47209 /* Pods_evenhub_evenhubTests.framework */,
+				BEE2FF92C9F13003CEB04B4B /* Pods_Eventhub.framework */,
+				FB44A35183BA5C2251A7E77F /* Pods_Eventhub_EventhubTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -277,8 +277,8 @@
 			);
 			dependencies = (
 			);
-			name = "Eventhub";
-			productName = "Eventhub";
+			name = Eventhub;
+			productName = Eventhub;
 			productReference = 13B07F961A680F5B00A75B9A /* Eventhub.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -548,7 +548,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "EventhubTests/Info.plist";
+				INFOPLIST_FILE = EventhubTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -572,7 +572,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = "EventhubTests/Info.plist";
+				INFOPLIST_FILE = EventhubTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -600,8 +600,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VVZ53L65HU;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "Eventhub/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Event hub";
+				INFOPLIST_FILE = Eventhub/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Event hub";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -613,7 +613,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "Eventhub";
+				PRODUCT_NAME = Eventhub;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -633,8 +633,8 @@
 				CODE_SIGN_ENTITLEMENTS = Eventhub/Eventhub.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VVZ53L65HU;
-				INFOPLIST_FILE = "Eventhub/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Event hub";
+				INFOPLIST_FILE = Eventhub/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Event hub";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -646,7 +646,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "Eventhub";
+				PRODUCT_NAME = Eventhub;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

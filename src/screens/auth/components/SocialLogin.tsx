@@ -18,7 +18,7 @@ import {addAuth} from '../../../redux/reducers/authReducer';
 
 GoogleSignin.configure({
   webClientId:
-    '51183564123-pf81s6h2gnkmudbcnhe2j6ke2eapt6l1.apps.googleusercontent.com',
+    '416703257608-1nfs3je71q2ksdiqj4ihfut5gpn3v303.apps.googleusercontent.com',
   iosClientId:
     '51183564123-ftijaqo23c9thm2kfe9ssgqq6p92ru72.apps.googleusercontent.com',
 });
@@ -40,6 +40,8 @@ const SocialLogin = () => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const user = userInfo.user;
+
+      console.log(user);
 
       const res: any = await authenticationAPI.HandleAuthentication(
         api,

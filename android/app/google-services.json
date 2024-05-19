@@ -7,12 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:416703257608:android:a9aa3e10cfa7ad6df085bd",
+        "mobilesdk_app_id": "1:416703257608:android:1a50d6d760991a8ef085bd",
         "android_client_info": {
-          "package_name": "com.evenhub"
+          "package_name": "com.bsdaoquang.eventhub"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "416703257608-bcq8c4j1mgfial18e67hug0deesuqnkq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bsdaoquang.eventhub",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "416703257608-1nfs3je71q2ksdiqj4ihfut5gpn3v303.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBoiZSCK0by-VglePibmstqzSjKCaRhcrs"
@@ -20,7 +33,55 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416703257608-1nfs3je71q2ksdiqj4ihfut5gpn3v303.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416703257608-8os3qmg7sfhboldq38r1rb7l31ek409e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.evenhub"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416703257608:android:a9aa3e10cfa7ad6df085bd",
+        "android_client_info": {
+          "package_name": "com.evenhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416703257608-1nfs3je71q2ksdiqj4ihfut5gpn3v303.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoiZSCK0by-VglePibmstqzSjKCaRhcrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416703257608-1nfs3je71q2ksdiqj4ihfut5gpn3v303.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416703257608-8os3qmg7sfhboldq38r1rb7l31ek409e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.evenhub"
+              }
+            }
+          ]
         }
       }
     }
