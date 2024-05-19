@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "416703257608-bcq8c4j1mgfial18e67hug0deesuqnkq.apps.googleusercontent.com",
+          "client_id": "416703257608-oagch8g02b1uq32va308mljq1f2onuiv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bsdaoquang.eventhub",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "ef51d44d4c277c25bdcb37c4299b7f0380f86f3c"
           }
         },
         {
