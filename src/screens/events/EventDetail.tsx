@@ -54,6 +54,7 @@ const EventDetail = ({navigation, route}: any) => {
   const [profile, setProfile] = useState<ProfileModel>();
   const [isVisibleModalinvite, setIsVisibleModalinvite] = useState(false);
   const [item, setItem] = useState<EventModel>();
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const auth: AuthState = useSelector(authSelector);
   const dispatch = useDispatch();
@@ -141,7 +142,7 @@ const EventDetail = ({navigation, route}: any) => {
   const handleToggleFollowing = async (id: string) => {
     const api = `/update-following`;
 
-    setIsLoading(true);
+    setIsUpdating(true);
     try {
       const res = await userAPI.HandleUser(
         api,
@@ -152,10 +153,10 @@ const EventDetail = ({navigation, route}: any) => {
         'put',
       );
       dispatch(updateFollowing(res.data));
-      setIsLoading(false);
+      setIsUpdating(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      setIsUpdating(false);
     }
   };
 
@@ -189,8 +190,6 @@ const EventDetail = ({navigation, route}: any) => {
       console.log(error);
     }
   };
-
-  console.log(auth.id, item?.authorId);
 
   return isLoading ? (
     <View style={[globalStyles.container, globalStyles.center, {flex: 1}]}>
@@ -466,7 +465,7 @@ const EventDetail = ({navigation, route}: any) => {
         />
       </LinearGradient>
 
-      <LoadingModal visible={isLoading} />
+      <LoadingModal visible={isUpdating} />
 
       <ModalInvite
         title={item.title}

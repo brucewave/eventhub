@@ -13,11 +13,7 @@ const LoadingModal = (props: Props) => {
   const {visible, mess} = props;
 
   return (
-    <Modal
-      visible={visible}
-      style={[{flex: 1}]}
-      transparent
-      statusBarTranslucent>
+    <Modal visible={visible} transparent statusBarTranslucent>
       <View
         style={{
           flex: 1,
