@@ -1,8 +1,8 @@
-import React from 'react';
-import {ActivityIndicator, Image, ImageBackground} from 'react-native';
-import {appInfo} from '../constants/appInfos';
-import {SpaceComponent} from '../components';
-import {appColors} from '../constants/appColors';
+import { View, Text, ImageBackground, Image, ActivityIndicator } from 'react-native'
+import React from 'react'
+import { appInfo } from '../constants/appInfos';
+import { SpaceComponent } from '../components';
+import { appColors } from '../constants/appColors';
 
 const SplashScreen = () => {
   return (
@@ -17,14 +17,15 @@ const SplashScreen = () => {
       <Image
         source={require('../assets/images/logo.png')}
         style={{
-          width: appInfo.sizes.WIDTH * 0.7,
+          width: appInfo.sizes.WIDTH * 0.8,
           resizeMode: 'contain',
-        }}
+
+          }}
       />
       <SpaceComponent height={16} />
-      <ActivityIndicator color={appColors.gray} size={22} />
+      <ActivityIndicator color={appColors.gray} size={22}/>
     </ImageBackground>
   );
 };
 
-export default SplashScreen;
+export default SplashScreen
